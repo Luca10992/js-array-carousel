@@ -27,4 +27,15 @@ Al click delle frecce, oltre al cambio di immagine attiva, gestire il cambio di 
 
 ## Svolgimento
 
--
+### Milestone 1
+
+- creo una struttura base statica;
+
+### Milestone 2
+
+- creo un array con le 5 immagini;
+- creo un ciclo FOR che mi permetta di selezionare le singole immagini una alla volta e le altre di nasconderle;
+
+### Milestone 3
+
+- creo un evento per ogni freccia che mi permetta di cambiare l'immagine visibile a schermo.
