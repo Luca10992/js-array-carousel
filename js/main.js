@@ -24,13 +24,31 @@ let miniHtml = '';
 for (let i = 0; i < slides.length; i++) {
     const miniature = slides[i];
     let miniActive = (i === slideBig) ? "active" : "";
-    miniHtml += `
-    <div class="slide-container">
-        <img class="miniature ${miniActive}" src="./img/${miniature}" alt="slide ${i}">
-    </div>
-    `
+    
+    const newMiniContainer = document.createElement("div");
+    const newMiniImg = document.createElement("img");
+
+    newMiniContainer.classList.add("slide-container");
+    newMiniContainer.setAttribute("data-miniature-index", i);
+
+    newMiniImg.classList.add("miniature");
+    if (miniActive) newMiniImg.classList.add("active");
+    newMiniImg.setAttribute("src", `./img/${miniature}`);
+    newMiniImg.setAttribute("alt", `slide ${i}`);
+    newMiniContainer.append(newMiniImg);
+    miniatureContainer.append(newMiniContainer);
+
+    // * evento click miniature
+    newMiniContainer.addEventListener('click', function () {
+        allSlides[slideBig].classList.remove("active"); 
+        allMiniature[slideBig].classList.remove("active");
+    
+        slideBig = this.getAttribute("data-miniature-index");
+    
+        allSlides[slideBig].classList.add("active");
+        allMiniature[slideBig].classList.add("active");    
+    }) 
 }
-miniatureContainer.innerHTML = miniHtml;
 
 // * evento freccia destra
 const allSlides = document.querySelectorAll(".slide");
@@ -56,7 +74,7 @@ arrowLeft.addEventListener('click', function () {
     allMiniature[slideBig].classList.add("active");
 });
 
-// * evento click miniature
+
 
 
 
