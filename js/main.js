@@ -1,7 +1,8 @@
 const slideContainer = document.querySelector(".container-primary");
 const arrowLeft = document.querySelector(".arrow-left");
 const arrowRight = document.querySelector(".arrow-right");
-const miniatureContainer = document.querySelector(".miniature-container")
+const miniatureContainer = document.querySelector(".miniature-container");
+const carousel = document.querySelector(".carousel");
 
 // definisco le varie slide
 const slides = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg'];
@@ -40,19 +41,14 @@ for (let i = 0; i < slides.length; i++) {
 
     // * evento click miniature
     newMiniContainer.addEventListener('click', function () {
-        allSlides[slideBig].classList.remove("active"); 
-        allMiniature[slideBig].classList.remove("active");
-    
-        slideBig = this.getAttribute("data-miniature-index");
-    
-        allSlides[slideBig].classList.add("active");
-        allMiniature[slideBig].classList.add("active");    
+        miniatureClick(newMiniContainer);
     }) 
 }
 
 // * evento freccia destra
 const allSlides = document.querySelectorAll(".slide");
 const allMiniature = document.querySelectorAll(".miniature");
+
 arrowRight.addEventListener('click', function () {
     nextSlide();
 });
@@ -64,18 +60,20 @@ arrowLeft.addEventListener('click', function () {
 
 // * evento mouse
 
-const slideInterval = setInterval(nextSlide, 3000);
-
-slideContainer.addEventListener("mouseleave", function() {
+carousel.addEventListener("mouseleave", function() {
     slideInterval = setInterval(nextSlide, 3000);
 });
 
-slideContainer.addEventListener("mouseover", function() {
+carousel.addEventListener("mouseover", function() {
     clearInterval(slideInterval);
 });
 
 
 // !!!!! Function !!!!!
+
+let slideInterval = setInterval(function() {
+    nextSlide();
+}, 3000);
 
 function nextSlide() {
     allSlides[slideBig].classList.remove("active"); 
@@ -95,6 +93,16 @@ function prevSlide() {
 
     allSlides[slideBig].classList.add("active");
     allMiniature[slideBig].classList.add("active");
+}
+
+function miniatureClick(element) {
+    allSlides[slideBig].classList.remove("active"); 
+        allMiniature[slideBig].classList.remove("active");
+    
+        slideBig = element.getAttribute("data-miniature-index");
+    
+        allSlides[slideBig].classList.add("active");
+        allMiniature[slideBig].classList.add("active");
 }
 
 

@@ -19,7 +19,7 @@ body {
     height: 100%;
 }
 
-.container-primary:hover .slide {
+.carousel:hover .slide {
     border: 7px solid orange;
 }
 
